@@ -2,7 +2,7 @@
 
 ## Ratkaistava ongelma
 
-Levittäytyminen tähtikartalla mahdollisimman laajalti annetussa aikarajassa. Ylitettävissä oleva tähtien välimatka on rajallinen, joten päästäkseen tähdeltä A tähdelle B on usein tarpeen kulkea kiertotietä. Aikaa mitataan "vuoroissa", yhdessä vuorossa voi:
+Levittäytyminen tähtikartalla mahdollisimman laajalti annetussa aikarajassa. Ylitettävissä oleva välimatka on rajallinen, joten päästäkseen tähdeltä A tähdelle B on usein tarpeen kulkea kiertotietä. Aikaa mitataan "vuoroissa", yhdessä vuorossa voi:
 - kulkea avaruusaluksella yhden "hypyn" tähtien välillä
  - "kantama" on yksi hyppy siirtokunnasta tai tukikohdasta
 - rakentaa avaruusaluksen siirtokunnassa
@@ -17,6 +17,15 @@ Ainakin aluksi siirtokunta sijoittuu tiettyyn aurinkokunnalle, ei tietylle plane
 
 Annetaan aloitussiirtokunnan ("kotiplaneetan") koordinaatit, sekä tähtikartta. Tähtikartta sisältää tähtien koordinaatit, sekä planeettakunnan tiedot (planeettojen määrä ja kunkin mahdollisen asutettavuus- ja mineraaliominaisuuden). Aloitussiirtokunnassa on yksi avaruusalus.
 
-## Toteutuksesta
+## Algoritmeista
 
-Käytetyt algoritmit yms. eivät ole kiveen kirjoitettuja. Päällimmäinen ajatus on soveltaa A* -algoritmia.
+Asutettavat tähdet valitaan priorisoinnin perusteella, priorisointialgoritmi voisi toimia pääpiirteittäin näin:
+- etäisyys aloitustähdestä laskee prioriteettia
+ - oletuksena, että AI-pelaaja haluaa "puskuria" aloitustähtensä ympärille
+ - siirtokunnat oletettavasti kehittyvät "paremmiksi" pelin kuluessa, joten mahdollisimman aikainen siirtokunnan perustaminen on tuo etua
+- asutettavat planeetat nostavat prioriteettia
+- mineraalivaroja omaavat planeetat nostavat prioriteettia
+- tähden saavuttamiseksi vaadittavat uudet tukikohdat/siirtokunnat laskevat prioriteettia, koska ne lisäävät tähden saavuttamisen "kustannuksia" (aika, resurssit)
+
+Avaruusalusten reittien laskemiseen voidaan käyttää esim. A* -algoritmia tai muuta reittihakualgoritmia.
+
