@@ -37,4 +37,13 @@ public class Star implements Comparable<Star> {
 	public boolean equals(Star o) {
 		return location.equals(o.location);
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		if (name != null) {
+			sb.append(name + " ");
+		}
+		sb.append('[' + location.x + ',' + location.y + ',' + location.z + ']');
+		return sb.toString();
+	}
 }

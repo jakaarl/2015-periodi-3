@@ -3,14 +3,14 @@ package tira.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
 
-import tira.collections.List;
-import tira.collections.ListWrapper;
+import org.junit.Test;
 
 public class StarTest {
 	
-	private static final List<Planet> EMPTY_PLANET_LIST = new ListWrapper<>();
+	private static final List<Planet> EMPTY_PLANET_LIST = new ArrayList<>();
 	
 	@Test
 	public void equalObjectIdentityShouldImplyEquality() {

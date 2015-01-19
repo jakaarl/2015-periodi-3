@@ -1,7 +1,8 @@
 package tira.navigation;
 
-import tira.collections.List;
-import tira.collections.ListWrapper;
+import java.util.ArrayList;
+import java.util.List;
+
 import tira.domain.Star;
 
 /**
@@ -15,7 +16,7 @@ public class NavigationNode implements Comparable<NavigationNode> {
 	
 	public NavigationNode(Star star) {
 		this.star = star;
-		this.connections = new ListWrapper<>();
+		this.connections = new ArrayList<>();
 	}
 
 	@Override
