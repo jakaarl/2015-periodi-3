@@ -1,5 +1,7 @@
 # Reittihaku
 
+[![Build Status](https://travis-ci.org/jakaarl/2015-periodi-3.svg?branch=master)](https://travis-ci.org/jakaarl/2015-periodi-3)
+
 ## Ratkaistava ongelma
 
 Levittäytyminen tähtikartalla mahdollisimman laajalti annetussa aikarajassa. Ylitettävissä oleva välimatka on rajallinen, joten päästäkseen tähdeltä A tähdelle B on usein tarpeen kulkea kiertotietä. Aikaa mitataan "vuoroissa", yhdessä vuorossa voi:
