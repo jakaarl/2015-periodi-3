@@ -13,6 +13,13 @@ public class Star implements Comparable<Star> {
 		this.location = location;
 		this.planets = planets;
 	}
+	
+	@SuppressWarnings("unused")
+	private Star() {
+		this.name = null;
+		this.location = null;
+		this.planets = null;
+	}
 
 	@Override
 	public int compareTo(Star o) {

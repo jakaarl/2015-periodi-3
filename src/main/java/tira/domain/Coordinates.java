@@ -14,6 +14,13 @@ public class Coordinates implements Comparable<Coordinates> {
 		this.y = y;
 		this.z = z;
 	}
+	
+	@SuppressWarnings("unused")
+	private Coordinates() {
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
+	}
 
 	@Override
 	public int compareTo(Coordinates o) {

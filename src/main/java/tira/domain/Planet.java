@@ -10,6 +10,12 @@ public class Planet {
 		this.minerals = minerals;
 	}
 	
+	@SuppressWarnings("unused")
+	private Planet() {
+		this.habitable = false;
+		this.minerals = false;
+	}
+	
 	public boolean isHabitable() {
 		return habitable;
 	}
