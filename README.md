@@ -19,13 +19,15 @@ Annetaan aloitussiirtokunnan ("kotiplaneetan") koordinaatit, sekä tähtikartta.
 
 ## Algoritmeista
 
+Tähtikartasta on rakennettava verkko, jossa yhteydet luodaan annetun maksimietäisyyden päässä toisistaan olevien tähtien välille. Naiivilla algoritmillä verkon alustaminen olisi melko hidas operaatio (tasoa O(n^2)), joten optimoinnille olisi tilausta (tosin kertaluontoisuutensa takia tämä ei ole kokonaisuuden kannalta kovin tärkeää).
+
 Asutettavat tähdet valitaan priorisoinnin perusteella, priorisointialgoritmi voisi toimia pääpiirteittäin näin:
 - etäisyys aloitustähdestä laskee prioriteettia
  - oletuksena, että AI-pelaaja haluaa "puskuria" aloitustähtensä ympärille
- - siirtokunnat oletettavasti kehittyvät "paremmiksi" pelin kuluessa, joten mahdollisimman aikainen siirtokunnan perustaminen on tuo etua
+ - siirtokunnat oletettavasti kehittyvät "paremmiksi" pelin kuluessa, joten mahdollisimman aikainen siirtokunnan perustaminen tuo etua
 - asutettavat planeetat nostavat prioriteettia
 - mineraalivaroja omaavat planeetat nostavat prioriteettia
 - tähden saavuttamiseksi vaadittavat uudet tukikohdat/siirtokunnat laskevat prioriteettia, koska ne lisäävät tähden saavuttamisen "kustannuksia" (aika, resurssit)
 
-Avaruusalusten reittien laskemiseen voidaan käyttää esim. A* -algoritmia tai muuta reittihakualgoritmia.
+Avaruusalusten reittien laskemiseen voidaan käyttää esim. A* -algoritmia (O(n^2) tai huonompi, riippuen verkon yhteyksien määrästä).
 
