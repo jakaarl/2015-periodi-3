@@ -1,6 +1,6 @@
 # Reittihaku
 
-[![Build Status](https://travis-ci.org/jakaarl/2015-periodi-3.svg?branch=master)](https://travis-ci.org/jakaarl/2015-periodi-3)
+[![Build Status](https://travis-ci.org/jakaarl/2015-periodi-3.svg?branch=master)](https://travis-ci.org/jakaarl/2015-periodi-3) [![Coverage Status](https://coveralls.io/repos/jakaarl/2015-periodi-3/badge.svg)](https://coveralls.io/r/jakaarl/2015-periodi-3)
 
 ## Ratkaistava ongelma
 
