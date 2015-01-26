@@ -6,6 +6,9 @@ import java.util.List;
 
 import tira.domain.Star;
 
+/**
+ * A utility for generating and holding a list of {@link NavigationNode}s.
+ */
 public class StarMap {
 	
 	public final List<NavigationNode> stars;
