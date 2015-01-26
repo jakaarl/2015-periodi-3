@@ -38,5 +38,21 @@ public class StarTest {
 		assertFalse(one.hashCode() == other.hashCode());
 		assertFalse(0 == one.compareTo(other));
 	}
+	
+	@Test
+	public void toStringShouldDescribeLocationIfNoNamePresent() {
+		Coordinates location = new Coordinates(1, 2, 3);
+		Star star = new Star(null, location, EMPTY_PLANET_LIST);
+		assertEquals(location.toString(), star.toString());
+	}
+	
+	@Test
+	public void toStringShouldDescribeNameAndLocation() {
+		Coordinates location = new Coordinates(2, 2, 2);
+		String name = "Coruscant";
+		Star star = new Star(name, location, EMPTY_PLANET_LIST);
+		String expected = name + " " + location.toString();
+		assertEquals(expected, star.toString());
+	}
 
 }

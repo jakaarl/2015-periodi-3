@@ -1,5 +1,12 @@
 package tira.domain;
 
+/**
+ * A very simple representation of a planet. Indicates whether or not the planet has:
+ * <ul>
+ *   <li>habitable conditions</li>
+ *   <li>useful minerals</li>
+ * </ul>
+ */
 public class Planet {
 	
 	private final boolean habitable;

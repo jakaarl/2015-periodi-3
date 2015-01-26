@@ -55,5 +55,10 @@ public class Coordinates implements Comparable<Coordinates> {
 	public boolean equals(Coordinates o) {
 		return (this.x == o.x && this.y == o.y && this.z == o.z);
 	}
+	
+	@Override
+	public String toString() {
+		return "[" + x + "," + y + "," + z + "]";
+	}
 
 }

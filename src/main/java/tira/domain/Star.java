@@ -2,6 +2,11 @@ package tira.domain;
 
 import java.util.List;
 
+/**
+ * A simple representation of a star. The identity of a star is mostly determined by location: each star is expected
+ * to have a unique location. Binary stars etc. are not modeled - a star is simply a point in space, with zero or more
+ * planets around it.
+ */
 public class Star implements Comparable<Star> {
 	
 	public final String name; // irrelevant for all practical purposes
@@ -50,7 +55,7 @@ public class Star implements Comparable<Star> {
 		if (name != null) {
 			sb.append(name + " ");
 		}
-		sb.append('[' + location.x + ',' + location.y + ',' + location.z + ']');
+		sb.append(location.toString());
 		return sb.toString();
 	}
 }
