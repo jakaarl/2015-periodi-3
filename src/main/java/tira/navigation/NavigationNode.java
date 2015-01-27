@@ -31,7 +31,16 @@ public class NavigationNode implements Comparable<NavigationNode> {
 	
 	@Override
 	public boolean equals(Object o) {
-		return star.equals(o);
+		if (this == o) return true;
+		if (o instanceof NavigationNode) {
+			return equals((NavigationNode) o);
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean equals(NavigationNode other) {
+		return star.equals(other.star);
 	}
 	
 }
