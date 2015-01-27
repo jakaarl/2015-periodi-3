@@ -12,7 +12,7 @@ import tira.domain.Star;
 public class NavigationNode implements Comparable<NavigationNode> {
 	
 	public final Star star;
-	public final List<Star> connections;
+	public final List<NavigationNode> connections;
 	
 	public NavigationNode(Star star) {
 		this.star = star;

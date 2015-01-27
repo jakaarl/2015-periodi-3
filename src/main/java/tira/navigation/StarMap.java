@@ -31,7 +31,7 @@ public class StarMap {
 	 * 
 	 * @return	a star map.
 	 */
-	public static StarMap build(List<Star> stars, int maxDistance) {
+	public static StarMap build(List<NavigationNode> stars, int maxDistance) {
 		if (stars == null || stars.isEmpty()) {
 			throw new IllegalArgumentException("Null or empty star list");
 		}
@@ -41,29 +41,29 @@ public class StarMap {
 		return new StarMap(buildNodes(stars, maxDistance));
 	}
 	
-	private static List<NavigationNode> buildNodes(List<Star> stars, int maxDistance) {
+	private static List<NavigationNode> buildNodes(List<NavigationNode> stars, int maxDistance) {
 		List<NavigationNode> nodes = new ArrayList<>();
-		for (Iterator<Star> iterator = stars.iterator(); iterator.hasNext(); ) {
-			NavigationNode currentNode = new NavigationNode(iterator.next());
+		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
+			NavigationNode currentNode = iterator.next();
 			addConnections(currentNode, stars, maxDistance);
 			nodes.add(currentNode);
 		}
 		return nodes;
 	}
 	
-	private static void addConnections(NavigationNode currentNode, List<Star> stars, int maxDistance) {
+	private static void addConnections(NavigationNode currentNode, List<NavigationNode> stars, int maxDistance) {
 		// TODO: redesign to avoid instantiating calculator and passing many args
-		// TODO: perhaps create nodes in advance, add both ends of connections and remove already processed ones?
+	    // TODO: fill both ends of connections, remove processed nodes
 		DistanceCalculator calculator = new DistanceCalculator();
 		Star currentStar = currentNode.star;
-		for (Iterator<Star> iterator = stars.iterator(); iterator.hasNext(); ) {
-			Star otherStar = iterator.next();
-			if (currentStar.equals(otherStar)) {
+		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
+			NavigationNode otherNode = iterator.next();
+			if (currentStar.equals(otherNode)) {
 				continue;
 			}
-			int distance = calculator.distance(currentStar.location, otherStar.location);
+			int distance = calculator.distance(currentStar.location, otherNode.star.location);
 			if (distance <= maxDistance) {
-				currentNode.connections.add(otherStar);
+				currentNode.connections.add(otherNode);
 			}
 		}
 	}
