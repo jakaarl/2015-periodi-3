@@ -13,7 +13,7 @@ Levittäytyminen tähtikartalla mahdollisimman laajalti annetussa aikarajassa. Y
 - perustaa uuden tukikohdan; tämäkin "käyttää" avaruusaluksen
  - vaatii, että tähdellä on väh. 1 planeetta - ei tarvitse olla asutettava tai omata mineraaleja
 
-Ainakin aluksi siirtokunta sijoittuu tiettyyn aurinkokunnalle, ei tietylle planeetalle. Siirtokunnan perustaminen vaatii aurinkokunnasta planeetan, joka on asutettavissa. Avaruusalusten rakentaminen vaatii siirtokunnalta mineraaleja. Mineraalit ja asutettavuus ovat boolean-henkisiä "lippuja": kullakin planeetalla voi olla toinen tai kumpikin - tai ei kumpaakaan.
+Ainakin aluksi siirtokunta sijoittuu tiettyyn aurinkokuntaan, ei tietylle planeetalle. Siirtokunnan perustaminen vaatii aurinkokunnasta planeetan, joka on asutettavissa. Avaruusalusten rakentaminen vaatii siirtokunnalta mineraaleja. Mineraalit ja asutettavuus ovat boolean-henkisiä "lippuja": kullakin planeetalla voi olla toinen tai kumpikin - tai ei kumpaakaan.
 
 ### Alkutilanne
 
