@@ -12,6 +12,7 @@ import tira.domain.Star;
 public class StarMap {
 	
 	public final List<NavigationNode> stars;
+	private static final DistanceCalculator CALCULATOR = new DistanceCalculator();
 
 	/**
 	 * Constructs a star map for holding navigation nodes.
@@ -45,6 +46,7 @@ public class StarMap {
 		List<NavigationNode> nodes = new ArrayList<>();
 		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
 			NavigationNode currentNode = iterator.next();
+			iterator.remove();
 			addConnections(currentNode, stars, maxDistance);
 			nodes.add(currentNode);
 		}
@@ -52,18 +54,13 @@ public class StarMap {
 	}
 	
 	private static void addConnections(NavigationNode currentNode, List<NavigationNode> stars, int maxDistance) {
-		// TODO: redesign to avoid instantiating calculator and passing many args
-	    // TODO: fill both ends of connections, remove processed nodes
-		DistanceCalculator calculator = new DistanceCalculator();
 		Star currentStar = currentNode.star;
 		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
 			NavigationNode otherNode = iterator.next();
-			if (currentStar.equals(otherNode)) {
-				continue;
-			}
-			int distance = calculator.distance(currentStar.location, otherNode.star.location);
+			int distance = CALCULATOR.distance(currentStar.location, otherNode.star.location);
 			if (distance <= maxDistance) {
 				currentNode.connections.add(otherNode);
+				otherNode.connections.add(currentNode);
 			}
 		}
 	}

@@ -3,6 +3,7 @@ package tira.navigation;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -24,14 +25,6 @@ public class StarMapTest {
 	        new NavigationNode(new Star("Alpha Centauri", new Coordinates(-307,315,-5), EMPTY_PLANETS));
 	private static final NavigationNode BARNARDS_STAR =
 	        new NavigationNode(new Star("Barnard's Star", new Coordinates(297,494,145), EMPTY_PLANETS));
-	private static final NavigationNode WOLF_359 =
-	        new NavigationNode(new Star("Wolf 359", new Coordinates(-391,-190,647), EMPTY_PLANETS));
-	private static final NavigationNode LALANDE_21185 =
-	        new NavigationNode(new Star("Lalande 21185", new Coordinates(-31,-345,756), EMPTY_PLANETS));
-	private static final NavigationNode SIRIUS =
-	        new NavigationNode(new Star("Sirius", new Coordinates(-623,-577,-133), EMPTY_PLANETS));
-	private static final NavigationNode EPSILON_ERIDANI =
-	        new NavigationNode(new Star("Epsilon Eridani", new Coordinates(-192,-674,-782), EMPTY_PLANETS));
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldRaiseExceptionOnNullStarList() {
@@ -50,8 +43,10 @@ public class StarMapTest {
 	
 	@Test
 	public void shouldHaveCorrectConnections() {
-		List<NavigationNode> stars = Arrays.asList(
-		        SOL, PROXIMA_CENTAURI, ALPHA_CENTAURI, BARNARDS_STAR);
+	    // wrap in new list, since the one returned by Arrays.asList() does not
+	    // support item removal, as needed by StarMap.build()
+		List<NavigationNode> stars =
+		        new ArrayList<>(Arrays.asList(SOL, PROXIMA_CENTAURI, ALPHA_CENTAURI, BARNARDS_STAR));
 		StarMap map = StarMap.build(stars, 500);
 		assertFalse(map.stars.isEmpty());
 		NavigationNode sol = map.stars.get(0);
