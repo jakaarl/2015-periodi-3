@@ -1,10 +1,14 @@
 package tira.input;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 import flexjson.JSONDeserializer;
 import tira.domain.Star;
+import tira.navigation.NavigationNode;
 import tira.navigation.StarMap;
 
 /**
@@ -29,6 +33,20 @@ public class JsonStarListReader {
 	
 	List<Star> deserialize(Reader input) {
 		return deserializer.deserialize(input);
+	}
+	
+	public List<NavigationNode> readJson(String fileName) throws IllegalArgumentException {
+	    try {
+	        FileReader input = new FileReader(fileName);
+	        List<Star> stars = deserialize(input);
+	        List<NavigationNode> nodes = new ArrayList<>(stars.size());
+	        for (Star star : stars) {
+	            nodes.add(new NavigationNode(star));
+	        }
+	        return nodes;
+	    } catch (FileNotFoundException fnfe) {
+	        throw new IllegalArgumentException("Failed to read JSON input file: " + fileName, fnfe);
+	    }
 	}
 
 }
