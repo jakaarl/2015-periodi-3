@@ -15,7 +15,7 @@ public interface RouteFinder {
 	 *   <li>contain <code>from</code>, <code>to</code> and intermediate steps, if a route exists</li>
 	 *   <li>be ordered, in order of travelsal</li>
 	 * </ul>
-	 * If there are several routes with the same length exist, any one may be returned.
+	 * If there several routes with the same length exist, any one may be returned.
 	 * 
 	 * @param from	starting node.
 	 * @param to	goal node.
