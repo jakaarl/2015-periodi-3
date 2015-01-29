@@ -31,5 +31,5 @@ Asutettavat tähdet valitaan priorisoinnin perusteella, priorisointialgoritmi vo
 - mineraalivaroja omaavat planeetat nostavat prioriteettia
 - tähden saavuttamiseksi vaadittavat uudet tukikohdat/siirtokunnat laskevat prioriteettia, koska ne lisäävät tähden saavuttamisen "kustannuksia" (aika, resurssit)
 
-Avaruusalusten reittien laskemiseen voidaan käyttää esim. A* -algoritmia (O(n^2) tai huonompi, riippuen verkon yhteyksien määrästä). Heuristiikkafunktiona voisi luontevasti toimia koordinaattien välinen suora etäisyys.
+Avaruusalusten reittien laskemisessa voidaan kokeilla useampi algoritmeja, mutta ongelmanmäärittelyssä kunkin yhteyden kulkemisen kustannus on vakio, eikä riipu etäisyydestä: tästä seuraa, ettei A\* ole välttämättä mielekäs ratkaisu. Kokeiltavia algoritmeja ovat BFS ja Dijkstra - ehkäpä A\* saadaan sopivalla soveltamisella taipumaan?
 
