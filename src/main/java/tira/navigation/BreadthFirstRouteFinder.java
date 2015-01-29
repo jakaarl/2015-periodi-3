@@ -33,6 +33,7 @@ public class BreadthFirstRouteFinder implements RouteFinder {
 				if (!discovered.contains(neighbor)) {
 					queue.add(neighbor);
 					discovered.add(neighbor);
+					nodeToPrevious.put(neighbor, current);
 				}
 			}
 		}
