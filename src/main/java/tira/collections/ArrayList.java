@@ -44,7 +44,14 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E elem) {
-        validateIndex(index);
+    	if (index < 0 || index > size()) { // allows adding to end of list
+            throw new ArrayIndexOutOfBoundsException(index);
+        }
+    	if (index == size()) {
+    		ensureCapacity(1); // make sure there's room after tail
+    		tail = index; // update tail location
+    	}
+    	
         array[index] = elem;
     }
 
@@ -227,7 +234,7 @@ public class ArrayList<E> implements List<E> {
     }
     
     void validateIndex(int index) {
-        if (index < 0 || index >= array.length) {
+        if (index < 0 || index >= size()) {
             throw new ArrayIndexOutOfBoundsException(index);
         }
     }
