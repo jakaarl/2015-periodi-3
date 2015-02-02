@@ -70,6 +70,7 @@ public class ArrayList<E> implements List<E> {
     @Override
     public void clear() {
         array = new Object[array.length]; // discard old contents
+        tail = -1;
     }
 
     @Override
