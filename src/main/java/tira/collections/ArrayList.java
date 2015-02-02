@@ -1,5 +1,6 @@
 package tira.collections;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -22,8 +23,16 @@ public class ArrayList<E> implements List<E> {
     }
     
     public ArrayList(int initialSize) {
-        array = new Object[initialSize];
-        tail = -1;
+        this(new Object[initialSize], -1);
+    }
+    
+    public ArrayList(E[] initialArray) {
+    	this(initialArray, initialArray.length - 1);
+    }
+    
+    private ArrayList(Object[] array, int tail) {
+    	this.array = array;
+        this.tail = tail;
     }
     
     @Override
@@ -35,9 +44,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E elem) {
-        if (index < 0 || index >= array.length) {
-            throw new ArrayIndexOutOfBoundsException(index);
-        }
+        validateIndex(index);
         array[index] = elem;
     }
 
@@ -118,8 +125,13 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean remove(Object elem) {
-        E removed = remove(indexOf(elem));
-        return (removed != null);
+    	int index = indexOf(elem);
+        if (index == -1) {
+        	return false;
+        } else {
+        	remove(index);
+        	return true;
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -153,10 +165,13 @@ public class ArrayList<E> implements List<E> {
         return false;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public E set(int index, E elem) {
-        // TODO Auto-generated method stub
-        return null;
+    	validateIndex(index);
+    	E oldElem = (E) array[index];
+    	array[index] = elem;
+        return oldElem;
     }
 
     @Override
@@ -166,20 +181,30 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public List<E> subList(int from, int to) {
-        // TODO Auto-generated method stub
-        return null;
+    	validateIndex(from);
+    	validateIndex(to - 1);
+    	int length = to - from;
+    	Object[] newArray = new Object[length];
+        copyArrayTo(length, newArray);
+        return new ArrayList<E>(newArray, length - 1);
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        return null;
+    	int length = size();
+        Object[] copied = new Object[length];
+        copyArrayTo(length, copied);
+        return copied;
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <T> T[] toArray(T[] array) {
-        // TODO Auto-generated method stub
-        return null;
+    	T[] copied = (array.length >= this.array.length
+    			? array
+				: (T[]) Array.newInstance(array.getClass().getComponentType(), this.array.length));
+    	copyArrayTo(copied.length, copied);
+        return copied;
     }
     
     void ensureCapacity(int elemCount) {
@@ -208,12 +233,16 @@ public class ArrayList<E> implements List<E> {
     }
     
     private void copyArrayTo(Object[] newArray) {
+    	copyArrayTo(array.length, newArray);
+    }
+    
+    private void copyArrayTo(int length, Object[] newArray) {
         /* Could do this...
-        for (int i = 0; i < array.length; i++) {
+        for (int i = 0; i < length; i++) {
             newArray[i] = array[i];
         }
-        ... but this probably utilized system calls for efficiency: */
-        System.arraycopy(array, 0, newArray, 0, array.length);
+        ... but this probably utilizes system calls for efficiency: */
+        System.arraycopy(array, 0, newArray, 0, length);
     }
     
     private int indexOf(Object elem, boolean firstIndexOf) {
