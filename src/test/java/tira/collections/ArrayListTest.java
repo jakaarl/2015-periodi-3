@@ -2,6 +2,8 @@ package tira.collections;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class ArrayListTest {
@@ -105,6 +107,40 @@ public class ArrayListTest {
 		list.remove(one);
 		assertEquals(0, list.size());
 	}
+	
+	@Test
+	public void shouldContainElement() {
+	    ArrayList<Integer> list = new ArrayList<>();
+        Integer one = 1;
+        list.add(one);
+        assertEquals(true, list.contains(one));
+	}
+	
+	@Test
+    public void shouldNotContainElement() {
+        ArrayList<Integer> list = new ArrayList<>();
+        Integer one = 1;
+        list.add(one);
+        Integer two = 2;
+        assertEquals(false, list.contains(two));
+    }
+	
+	@Test
+	public void shouldContainAllElements() {
+	    ArrayList<Integer> list = new ArrayList<>();
+        Integer one = 1;
+        list.add(one);
+        assertEquals(true, list.containsAll(Arrays.asList(one)));
+	}
+	
+	@Test
+    public void shouldNotContainAllElements() {
+        ArrayList<Integer> list = new ArrayList<>();
+        Integer one = 1;
+        list.add(one);
+        Integer two = 2;
+        assertEquals(false, list.containsAll(Arrays.asList(one, two)));
+    }
 	
 	@Test
 	public void shouldBeEmptyAfterClear() {
