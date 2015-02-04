@@ -35,18 +35,24 @@ public class JsonStarListReader {
 		return deserializer.deserialize(input);
 	}
 	
-	public List<NavigationNode> readJson(String fileName) throws IllegalArgumentException {
+	List<Star> readJson(String fileName) throws IllegalArgumentException {
 	    try {
 	        FileReader input = new FileReader(fileName);
 	        List<Star> stars = deserialize(input);
-	        List<NavigationNode> nodes = new ArrayList<>(stars.size());
-	        for (Star star : stars) {
-	            nodes.add(new NavigationNode(star));
-	        }
-	        return nodes;
+	        return stars;
 	    } catch (FileNotFoundException fnfe) {
 	        throw new IllegalArgumentException("Failed to read JSON input file: " + fileName, fnfe);
 	    }
+	}
+	
+	StarMap buildStarMap(String fileName, int maxDistance) {
+	    List<Star> stars = readJson(fileName);
+	    List<NavigationNode> nodes = new ArrayList<>(stars.size());
+	    for (Star star : stars) {
+	        nodes.add(new NavigationNode(star));
+	    }
+	    StarMap map = StarMap.build(nodes, maxDistance);
+	    return map;
 	}
 
 }

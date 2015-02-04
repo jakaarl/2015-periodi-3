@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Star One",
+    "location": { "x": 1, "y": 2, "z": 3 },
+    "planets": [ { "habitable": false, "minerals": true }, { "habitable": true, "minerals": true } ]
+  },
+  {
+    "name": "Star Two",
+    "location": { "x": 5, "y": -1, "z": 5 },
+    "planets": [ { "habitable": false, "minerals": true } ]
+  }
+]
