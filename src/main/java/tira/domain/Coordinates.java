@@ -1,7 +1,8 @@
 package tira.domain;
 
 /**
- * Coordinates indicating a location in 3D space.
+ * Coordinates indicating a location in 3D space. The unit is assumed to be
+ * 1/100 light years, ie. 100 equals 1 light year.
  */
 public class Coordinates implements Comparable<Coordinates> {
 	
