@@ -15,7 +15,7 @@ import tira.navigation.StarMap;
 
 public class JsonStarListReaderTest {
 	
-    private static final String TEST_JSON_FILE = "stars.json";
+    private static final String TEST_JSON_FILE = "starmap.json";
     
     private JsonStarListReader jsonReader = new JsonStarListReader();
     
@@ -45,7 +45,7 @@ public class JsonStarListReaderTest {
 	@Test
 	public void shouldBuildStarMap() {
 	    URL resourceUrl = this.getClass().getClassLoader().getResource(TEST_JSON_FILE);
-	    StarMap map = jsonReader.buildStarMap(resourceUrl.getFile(), 20);
+	    StarMap map = jsonReader.buildStarMap(resourceUrl.getFile(), 1000);
 	    assertEquals(2, map.stars.size());
 	}
 

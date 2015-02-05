@@ -45,7 +45,7 @@ public class JsonStarListReader {
 	    }
 	}
 	
-	StarMap buildStarMap(String fileName, int maxDistance) {
+	public StarMap buildStarMap(String fileName, int maxDistance) {
 	    List<Star> stars = readJson(fileName);
 	    List<NavigationNode> nodes = new ArrayList<>(stars.size());
 	    for (Star star : stars) {
