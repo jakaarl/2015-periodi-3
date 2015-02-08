@@ -24,6 +24,23 @@ public class StarMap {
 	}
 	
 	/**
+	 * Finds a star by name.
+	 * 
+	 * @param name star name.
+	 * 
+	 * @return navigation node for the named star, or <code>null</code> if not found.
+	 */
+	public NavigationNode findStar(String name) {
+	    // TODO: perhaps should have a sorted map for name->star?
+	    for (NavigationNode node : stars) {
+	        if (name.equals(node.star.name)) {
+	            return node;
+	        }
+	    }
+	    return null;
+	}
+	
+	/**
 	 * Builds a new star map. <b>Important:</b> the given list of stars needs to be
 	 * modifiable and will be modified - provide a defensive copy if this is a problem.
 	 * 
@@ -44,6 +61,7 @@ public class StarMap {
 	
 	private static List<NavigationNode> buildNodes(List<NavigationNode> stars, int maxDistance) {
 		List<NavigationNode> nodes = new ArrayList<>();
+		// umm, kind of redundant creating another list?
 		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
 			NavigationNode currentNode = iterator.next();
 			iterator.remove();
