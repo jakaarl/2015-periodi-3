@@ -1,6 +1,9 @@
 package tira.navigation;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static tira.navigation.Stars.*;
 
@@ -45,6 +48,27 @@ public class StarMapTest {
 		assertTrue(sol.connections.contains(PROXIMA_CENTAURI_NODE));
 		assertTrue(sol.connections.contains(ALPHA_CENTAURI_NODE));
 		assertFalse(sol.connections.contains(BARNARDS_STAR_NODE));
+	}
+	
+	@Test
+	public void shouldFindStarByName() {
+		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
+		int listSize = stars.size();
+		StarMap map = StarMap.build(stars, 500);
+		assertEquals(listSize, map.stars.size());
+		NavigationNode sol = map.findStar(SOL_NODE.star.name);
+		assertNotNull(sol);
+		assertEquals(SOL_NODE.star.name, sol.star.name);
+	}
+	
+	@Test
+	public void shouldReturnNullWhenNoStarFound() {
+		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(PROXIMA_CENTAURI_NODE));
+		int listSize = stars.size();
+		StarMap map = StarMap.build(stars, 500);
+		assertEquals(listSize, map.stars.size());
+		NavigationNode sol = map.findStar(SOL_NODE.star.name);
+		assertNull(sol);
 	}
 
 }
