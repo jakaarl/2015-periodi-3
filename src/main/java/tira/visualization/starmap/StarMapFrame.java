@@ -66,5 +66,10 @@ public class StarMapFrame extends JFrame {
         }
         
     }
+    
+    /*
+     * TODO: use StarMap.calculateBoundingCube() to get the dimensions of the map
+     * - scale and center POV accordingly to fit on screen! 
+     */
 
 }
