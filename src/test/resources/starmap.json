@@ -8,5 +8,10 @@
     "name": "Star Two",
     "location": { "x": 500, "y": -100, "z": 500 },
     "planets": [ { "habitable": false, "minerals": true } ]
+  },
+  {
+    "name": "Distant Star",
+    "location": { "x": 1000, "y": 1000, "z": -1000 },
+    "planets": []
   }
 ]

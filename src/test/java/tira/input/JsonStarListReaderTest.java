@@ -39,14 +39,14 @@ public class JsonStarListReaderTest {
 	public void shouldReadFromFile() {
 	    URL resourceUrl = this.getClass().getClassLoader().getResource(TEST_JSON_FILE);
 	    List<Star> starList = jsonReader.readJson(resourceUrl.getFile());
-	    assertEquals(2, starList.size());
+	    assertEquals(3, starList.size());
 	}
 	
 	@Test
 	public void shouldBuildStarMap() {
 	    URL resourceUrl = this.getClass().getClassLoader().getResource(TEST_JSON_FILE);
 	    StarMap map = jsonReader.buildStarMap(resourceUrl.getFile(), 1000);
-	    assertEquals(2, map.stars.size());
+	    assertEquals(3, map.stars.size());
 	}
 
 }
