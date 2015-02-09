@@ -20,7 +20,7 @@ public class StarMapFrame extends JFrame {
     
     private static final String TITLE = "Star Map";
     
-    StarMapFrame(StarMap starMap) {
+    public StarMapFrame(StarMap starMap) {
         super();
         setTitle(TITLE);
         setExtendedState(MAXIMIZED_BOTH);

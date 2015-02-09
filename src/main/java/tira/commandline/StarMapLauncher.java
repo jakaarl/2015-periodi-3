@@ -1,4 +1,4 @@
-package tira.visualization.starmap;
+package tira.commandline;
 
 import java.util.Arrays;
 
@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 
 import tira.input.JsonStarListReader;
 import tira.navigation.StarMap;
+import tira.visualization.starmap.StarMapFrame;
 
 /**
  * Launcher for a {@link StarMap} visualization. By default, looks for the file

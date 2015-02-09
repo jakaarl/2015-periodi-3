@@ -1,13 +1,13 @@
-package tira.input;
+package tira.commandline;
 
 import java.io.PrintStream;
 import java.util.List;
 
+import tira.input.JsonStarListReader;
 import tira.navigation.BreadthFirstRouteFinder;
 import tira.navigation.NavigationNode;
 import tira.navigation.RouteFinder;
 import tira.navigation.StarMap;
-import tira.visualization.starmap.StarMapLauncher;
 
 /**
  * Runs route finder from the command line, printing out a route.
