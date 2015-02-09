@@ -56,9 +56,7 @@ public class StarMapTest {
 	@Test
 	public void shouldFindStarByName() {
 		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
-		int listSize = stars.size();
 		StarMap map = StarMap.build(stars, 500);
-		assertEquals(listSize, map.stars.size());
 		NavigationNode sol = map.findStar(SOL_NODE.star.name);
 		assertNotNull(sol);
 		assertEquals(SOL_NODE.star.name, sol.star.name);
@@ -67,19 +65,25 @@ public class StarMapTest {
 	@Test
 	public void shouldReturnNullWhenNoStarFound() {
 		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(PROXIMA_CENTAURI_NODE));
-		int listSize = stars.size();
 		StarMap map = StarMap.build(stars, 500);
-		assertEquals(listSize, map.stars.size());
 		NavigationNode sol = map.findStar(SOL_NODE.star.name);
 		assertNull(sol);
 	}
 	
 	@Test
-	public void shouldReturnBoundingCube() {
-		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
-		int listSize = stars.size();
+	public void oneStarMapShouldHavePointLikeBoundingCube() {
+		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE));
 		StarMap map = StarMap.build(stars, 500);
-		assertEquals(listSize, map.stars.size());
+		BoundingCube boundingCube = map.calculateBoundingCube();
+		assertEquals(SOL.location, boundingCube.nearTopLeft);
+		assertEquals(SOL.location, boundingCube.farBottomRight);
+		assertTrue(boundingCube.contains(SOL.location));
+	}
+	
+	@Test
+	public void twoStarMapShouldHaveStarLocationsAsBoundingCubeCorners() {
+		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
+		StarMap map = StarMap.build(stars, 500);
 		// Sol is located at 0,0,0 and Proxima Centauri at -304,292,-14
 		// thus the bounding cube should be defined by Proxima at near top left
 		// and Sol at far right bottom:
@@ -88,6 +92,16 @@ public class StarMapTest {
 		BoundingCube boundingCube = map.calculateBoundingCube();
 		assertEquals(nearTopLeft, boundingCube.nearTopLeft);
 		assertEquals(farBottomRight, boundingCube.farBottomRight);
+		assertTrue(boundingCube.contains(SOL.location));
+		assertTrue(boundingCube.contains(PROXIMA_CENTAURI.location));
+	}
+	
+	@Test
+	public void boundingCubeShouldNotContainGivenCoordinates() {
+		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
+		StarMap map = StarMap.build(stars, 500);
+		BoundingCube boundingCube = map.calculateBoundingCube();
+		assertFalse(boundingCube.contains(BARNARDS_STAR.location));
 	}
 
 }

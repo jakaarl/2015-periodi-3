@@ -135,5 +135,24 @@ public class StarMap {
 			this.nearTopLeft = nearTopLeft;
 			this.farBottomRight = farBottomRight;
 		}
+		
+		/**
+		 * Checks whether the given coordinates fall within this bounding cube.
+		 * Edges are inclusive: coordinates located on an edge are considered
+		 * contained.
+		 * 
+		 * @param coordinates	coordinates to check.
+		 * 
+		 * @return	<code>true</code> if coordinates are contained by the bounding cube.
+		 */
+		public boolean contains(Coordinates coordinates) {
+			return (
+					nearTopLeft.x <= coordinates.x &&
+					nearTopLeft.y >= coordinates.y &&
+					nearTopLeft.z <= coordinates.z &&
+					farBottomRight.x >= coordinates.x &&
+					farBottomRight.y <= coordinates.y &&
+					farBottomRight.z >= coordinates.z);
+		}
 	}
 }
