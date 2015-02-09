@@ -1,5 +1,6 @@
 package tira.input;
 
+import java.io.PrintStream;
 import java.util.List;
 
 import tira.navigation.BreadthFirstRouteFinder;
@@ -24,7 +25,7 @@ public class RouteFinderLauncher {
     
     public static void main(String[] args) {
         if (args.length != 3) {
-            printUsage();
+            printUsage(System.err);
             System.exit(1);
         }
         String jsonPath = args[0];
@@ -38,8 +39,8 @@ public class RouteFinderLauncher {
         printResult(route);
     }
     
-    static String printUsage() {
-        return "Required arguments: <jsonFile> <fromStar> <toStar>";
+    static void printUsage(PrintStream printStream) {
+        printStream.println("Required arguments: <jsonFile> <fromStar> <toStar>");
     }
     
     static StarMap loadStarMap(String jsonPath) {
