@@ -57,14 +57,15 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> elems) {
-        // TODO addAll implementation
-        throw new UnsupportedOperationException();
+    	for (E elem : elems) {
+    		add(elem);
+    	}
+    	return true;
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> elems) {
-     // TODO addAll implementation
-        throw new UnsupportedOperationException();
+    	throw new UnsupportedOperationException("Operation not implemented");
     }
 
     @Override
@@ -169,8 +170,7 @@ public class ArrayList<E> implements List<E> {
 
     @Override
     public boolean retainAll(Collection<?> elems) {
-        // TODO Auto-generated method stub
-        return false;
+        throw new UnsupportedOperationException("Operation not implemented");
     }
 
     @SuppressWarnings("unchecked")
@@ -273,13 +273,13 @@ public class ArrayList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return (array.length > (cursor + 1));
+            return (tail > (cursor + 1));
         }
 
         @SuppressWarnings("unchecked")
         @Override
         public T next() {
-            if ((cursor + 1) >= array.length) {
+            if ((cursor + 1) > tail) {
                 throw new NoSuchElementException();
             }
             removedAtCursor = false;
@@ -289,10 +289,11 @@ public class ArrayList<E> implements List<E> {
         @Override
         public void remove() {
             if (cursor < 0 || removedAtCursor) {
-                throw new IllegalStateException();
+                throw new IllegalStateException("Already removed at cursor position");
             }
             removedAtCursor = true;
-            array[cursor] = null;
+            ArrayList.this.remove(cursor);
+            cursor--; // otherwise we'd point at next() already
         }
     }
 

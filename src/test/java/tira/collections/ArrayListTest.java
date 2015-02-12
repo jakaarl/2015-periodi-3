@@ -3,6 +3,7 @@ package tira.collections;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.junit.Test;
 
@@ -150,6 +151,31 @@ public class ArrayListTest {
         assertEquals(false, list.isEmpty());
         list.clear();
         assertEquals(true, list.isEmpty());
+	}
+	
+	@Test
+	public void shouldBeIterableInProperOrder() {
+		ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+        	list.add(i);
+        }
+        Integer expected = 0;
+        for (Integer elem : list) {
+        	assertEquals(expected, elem);
+        	expected = new Integer(expected.intValue() + 1);
+        }
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void shouldThrowExceptionOnDoubleRemove() {
+		ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        for (Iterator<Integer> iterator = list.iterator(); iterator.hasNext();) {
+        	iterator.next();
+        	iterator.remove();
+        	iterator.remove();
+        }
 	}
 
 }
