@@ -60,10 +60,6 @@ public class ArrayList<E> implements List<E> {
         return (E) array[index];
     }
 
-    private int indexOf(Object elem) {
-        return indexOf(elem, true);
-    }
-
     @Override
     public boolean isEmpty() {
         return (tail == -1);
@@ -84,6 +80,10 @@ public class ArrayList<E> implements List<E> {
         	return true;
         }
     }
+    
+    private int indexOf(Object elem) {
+        return indexOf(elem, true);
+    }
 
     @SuppressWarnings("unchecked")
     @Override
@@ -100,6 +100,10 @@ public class ArrayList<E> implements List<E> {
     @Override
     public int size() {
         return tail + 1;
+    }
+    
+    protected int tail() {
+        return tail;
     }
     
     void ensureCapacity(int elemCount) {
