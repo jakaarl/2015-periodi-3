@@ -1,10 +1,6 @@
 package tira.collections;
 
-import java.lang.reflect.Array;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
 public class ArrayList<E> implements List<E> {
@@ -36,36 +32,9 @@ public class ArrayList<E> implements List<E> {
     }
     
     @Override
-    public boolean add(E elem) {
+    public void add(E elem) {
         ensureCapacity(1);
         array[++tail] = elem;
-        return true;
-    }
-
-    @Override
-    public void add(int index, E elem) {
-    	if (index < 0 || index > size()) { // allows adding to end of list
-            throw new ArrayIndexOutOfBoundsException(index);
-        }
-    	if (index == size()) {
-    		ensureCapacity(1); // make sure there's room after tail
-    		tail = index; // update tail location
-    	}
-    	
-        array[index] = elem;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> elems) {
-    	for (E elem : elems) {
-    		add(elem);
-    	}
-    	return true;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> elems) {
-    	throw new UnsupportedOperationException("Operation not implemented");
     }
 
     @Override
@@ -84,17 +53,6 @@ public class ArrayList<E> implements List<E> {
         return false;
     }
 
-    @Override
-    public boolean containsAll(Collection<?> elems) {
-        for (Object elem : elems) {
-            boolean contains = this.contains(elem);
-            if (!contains) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public E get(int index) {
@@ -102,8 +60,7 @@ public class ArrayList<E> implements List<E> {
         return (E) array[index];
     }
 
-    @Override
-    public int indexOf(Object elem) {
+    private int indexOf(Object elem) {
         return indexOf(elem, true);
     }
 
@@ -115,21 +72,6 @@ public class ArrayList<E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
         return new IteratorImpl<E>();
-    }
-
-    @Override
-    public int lastIndexOf(Object elem) {
-        return indexOf(elem, false);
-    }
-
-    @Override
-    public ListIterator<E> listIterator() {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -156,63 +98,8 @@ public class ArrayList<E> implements List<E> {
     }
 
     @Override
-    public boolean removeAll(Collection<?> elems) {
-        boolean removed = false;
-        for (int i = 0; i < array.length; i++) {
-            Object elem = array[i];
-            if (elems.contains(elem)) {
-                this.remove(i);
-                removed = true;
-            }
-        }
-        return removed;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> elems) {
-        throw new UnsupportedOperationException("Operation not implemented");
-    }
-
-    @SuppressWarnings("unchecked")
-	@Override
-    public E set(int index, E elem) {
-    	validateIndex(index);
-    	E oldElem = (E) array[index];
-    	array[index] = elem;
-        return oldElem;
-    }
-
-    @Override
     public int size() {
         return tail + 1;
-    }
-
-    @Override
-    public List<E> subList(int from, int to) {
-    	validateIndex(from);
-    	validateIndex(to - 1);
-    	int length = to - from;
-    	Object[] newArray = new Object[length];
-        copyArrayTo(length, newArray);
-        return new ArrayList<E>(newArray, length - 1);
-    }
-
-    @Override
-    public Object[] toArray() {
-    	int length = size();
-        Object[] copied = new Object[length];
-        copyArrayTo(length, copied);
-        return copied;
-    }
-
-    @SuppressWarnings("unchecked")
-	@Override
-    public <T> T[] toArray(T[] array) {
-    	T[] copied = (array.length >= this.array.length
-    			? array
-				: (T[]) Array.newInstance(array.getClass().getComponentType(), this.array.length));
-    	copyArrayTo(copied.length, copied);
-        return copied;
     }
     
     void ensureCapacity(int elemCount) {

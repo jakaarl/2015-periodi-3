@@ -15,18 +15,15 @@ public interface List<E> extends Iterable<E> {
     void add(E elem);
     
     /**
-     * Adds an element to this list at the given index. Index has to be zero,
-     * or up to {@link #size()} - ie. appending to the list is allowed, but
-     * only right after the current tail.
+     * Gets the element at given index.
      * 
-     * @param elem  element to add.
-     * @param index insertion index (starting from zero).
+     * @param index index of the element to get.
      * 
-     * @return  the element previously at given index, or <code>null</code> if none.
+     * @return  element at the given index.
      * 
-     * @throws  IndexOutOfBoundsException   if given index is negative, or more than {@link #size()}. 
+     * @throws IndexOutOfBoundsException    if index is negative or equal or greater than {@link #size()}.
      */
-    E add(E elem, int index) throws IndexOutOfBoundsException;
+    E get(int index) throws IndexOutOfBoundsException;
     
     /**
      * Removes the given element from this list.
@@ -39,7 +36,8 @@ public interface List<E> extends Iterable<E> {
     
     /**
      * Removes an element at given index. Specifying a negative index, or index equal or higher
-     * than list size causes an exception.
+     * than list size causes an exception. Any elements after the removed one will be
+     * shifted accordingly.
      * 
      * @param index index to remove at.
      * 
@@ -48,6 +46,11 @@ public interface List<E> extends Iterable<E> {
      * @throws  IndexOutOfBoundsException   if the given index is out of bounds.
      */
     E remove(int index) throws IndexOutOfBoundsException;
+    
+    /**
+     * Clears this list.
+     */
+    void clear();
     
     /**
      * Checks if this list is empty.
@@ -69,5 +72,14 @@ public interface List<E> extends Iterable<E> {
      * @return  an iterator.
      */
     Iterator<E> iterator();
+    
+    /**
+     * Checks if this list contains the given element.
+     * 
+     * @param elem  element to check for.
+     * 
+     * @return  <code>true</code>, if element is contained in the list.
+     */
+    boolean contains(E elem);
 
 }
