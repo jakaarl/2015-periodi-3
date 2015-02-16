@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static tira.navigation.Stars.*;
 
-import java.util.List;
-
 import org.junit.Test;
+
+import tira.collections.List;
 
 public class BreadthFirstRouteFinderTest {
 	

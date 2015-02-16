@@ -1,8 +1,8 @@
 package tira.commandline;
 
 import java.io.PrintStream;
-import java.util.List;
 
+import tira.collections.List;
 import tira.input.JsonStarListReader;
 import tira.navigation.BreadthFirstRouteFinder;
 import tira.navigation.NavigationNode;

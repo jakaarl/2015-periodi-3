@@ -42,6 +42,18 @@ public class ArrayList<E> implements List<E> {
         array = new Object[array.length]; // discard old contents
         tail = -1;
     }
+    
+    @Override
+    public void reverse() {
+        if (isEmpty()) {
+            return;
+        }
+        for (int i = 0; i <= (tail / 2); i++) {
+            Object temp = array[i];
+            array[i] = array[tail - i];
+            array[tail - i] = temp;
+        }
+    }
 
     @Override
     public boolean contains(Object elem) {
@@ -164,7 +176,7 @@ public class ArrayList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return (tail > (cursor + 1));
+            return (tail >= (cursor + 1));
         }
 
         @SuppressWarnings("unchecked")

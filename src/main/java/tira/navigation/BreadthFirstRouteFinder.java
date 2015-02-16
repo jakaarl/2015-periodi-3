@@ -1,12 +1,11 @@
 package tira.navigation;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import tira.collections.ArrayList;
 import tira.collections.ArrayListStack;
+import tira.collections.List;
 import tira.collections.Stack;
 
 /**
@@ -65,10 +64,10 @@ public class BreadthFirstRouteFinder implements RouteFinder {
 					; current = nodeToPrevious.get(current)) {
 				route.add(current);
 			}
-			Collections.reverse(route); // order would be to-from without reversal
-			return route;
+			route.reverse(); // order would be to-from without reversal
+			return route; 
 		} else {
-			return Collections.emptyList();
+			return new ArrayList<>(0);
 		}
 	}
 

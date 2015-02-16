@@ -1,6 +1,6 @@
 package tira.navigation;
 
-import java.util.List;
+import tira.collections.List;
 
 /**
  * Route finder.

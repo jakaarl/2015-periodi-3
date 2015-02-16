@@ -53,6 +53,12 @@ public interface List<E> extends Iterable<E> {
     void clear();
     
     /**
+     * Reverses the ordering of this list.
+     */
+    void reverse();
+    
+    
+    /**
      * Checks if this list is empty.
      * 
      * @return  <code>true</code>, if empty.
