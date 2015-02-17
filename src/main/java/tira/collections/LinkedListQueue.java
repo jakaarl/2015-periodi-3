@@ -16,7 +16,7 @@ public class LinkedListQueue<E> implements Queue<E> {
         if (isEmpty()) {
             throw new NoSuchElementException();
         }
-        return list.get(0);
+        return list.remove(0);
     }
 
     @Override
