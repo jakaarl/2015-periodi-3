@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import tira.collections.ArrayList;
-import tira.collections.ArrayListStack;
+import tira.collections.LinkedListQueue;
 import tira.collections.List;
-import tira.collections.Stack;
+import tira.collections.Queue;
 
 /**
  * An implementation of {@link RouteFinder} using Breadth First Search.
@@ -18,24 +18,24 @@ public class BreadthFirstRouteFinder implements RouteFinder {
 	@Override
 	public List<NavigationNode> findRoute(NavigationNode from, NavigationNode to) {
 	    /* Stack holding nodes to inspect. */
-		Stack<NavigationNode> awaitingInspection = new ArrayListStack<>();
+		Queue<NavigationNode> awaitingInspection = new LinkedListQueue<>();
 		/* List of nodes discovered, so we don't inspect them more than once. */
 		List<NavigationNode> discovered = new ArrayList<>();
 		/* Map for tracking our route; keeps track of where we arrived to each node from.  */
 		Map<NavigationNode, NavigationNode> nodeToPrevious = new HashMap<NavigationNode, NavigationNode>();
 		
-		awaitingInspection.push(from);
+		awaitingInspection.enqueue(from);
 		discovered.add(from);
 		nodeToPrevious.put(from, null); // mark starting point of the route
 		while (!awaitingInspection.isEmpty()) {
-			NavigationNode current = awaitingInspection.pop();
+			NavigationNode current = awaitingInspection.dequeue();
 			if (current.equals(to)) { // bingo! no need to look further
 				break;
 			}
 			for (NavigationNode neighbor : current.connections) {
 			    // queue any neighbors we haven't discovered yet
 				if (!discovered.contains(neighbor)) {
-					awaitingInspection.push(neighbor);
+					awaitingInspection.enqueue(neighbor);
 					discovered.add(neighbor);
 					nodeToPrevious.put(neighbor, current);
 				}
