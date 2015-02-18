@@ -141,7 +141,7 @@ public class LinkedList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return (current == null && current != tail);
+            return (current != tail);
         }
 
         @Override

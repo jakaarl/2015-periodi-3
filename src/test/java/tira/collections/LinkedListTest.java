@@ -84,6 +84,7 @@ public class LinkedListTest {
             assertEquals(elems[index], elem);
             index++;
         }
+        assertEquals(3, index);
     }
     
     @Test
@@ -99,6 +100,7 @@ public class LinkedListTest {
             assertEquals(elems[index], elem);
             index--;
         }
+        assertEquals(-1, index);
     }
 
 }
