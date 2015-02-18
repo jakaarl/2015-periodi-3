@@ -19,8 +19,10 @@ public interface Map<K,V> {
     
     /**
      * Gets the value associated with the given key.
-     * @param key
-     * @return
+     * 
+     * @param key	key.
+     * 
+     * @return	the value associated with <code>key</code>, or <code>null</code> if none.
      */
     V get(K key);
     
@@ -29,7 +31,7 @@ public interface Map<K,V> {
      * 
      * @param key   key to remove.
      * 
-     * @return  the associated value removed.
+     * @return  the associated value removed, or <code>null</code> if none.
      */
     V remove(K key);
     
@@ -41,4 +43,18 @@ public interface Map<K,V> {
      * @return  <code>true</code> if a value has been associated with the key.
      */
     boolean contains(K key);
+    
+    /**
+     * Checks if this map is empty.
+     * 
+     * @return	<code>true</code> if empty.
+     */
+    boolean isEmpty();
+    
+    /**
+     * Gets the number of key-value associations in this map.
+     * 
+     * @return	number of entries in the map.
+     */
+    int size();
 }
