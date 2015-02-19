@@ -1,11 +1,10 @@
 package tira.navigation;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import tira.collections.ArrayList;
+import tira.collections.HashMap;
 import tira.collections.LinkedListQueue;
 import tira.collections.List;
+import tira.collections.Map;
 import tira.collections.Queue;
 
 /**
@@ -56,7 +55,7 @@ public class BreadthFirstRouteFinder implements RouteFinder {
 	private List<NavigationNode> reconstructRoute(Map<NavigationNode, NavigationNode> nodeToPrevious,
 			NavigationNode destination) {
 		List<NavigationNode> route;
-		if (nodeToPrevious.containsKey(destination)) {
+		if (nodeToPrevious.contains(destination)) {
 			route = new ArrayList<>();
 			route.add(destination);
 			for (NavigationNode current = nodeToPrevious.get(destination)
