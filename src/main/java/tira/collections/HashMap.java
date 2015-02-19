@@ -107,7 +107,7 @@ public class HashMap<K, V> implements Map<K, V> {
 	}
 	
 	private int getIndex(K key) {
-		return (key.hashCode() % buckets.length);
+		return Math.abs(key.hashCode() % buckets.length);
 	}
 	
 	private static class Entry<A, B> {
