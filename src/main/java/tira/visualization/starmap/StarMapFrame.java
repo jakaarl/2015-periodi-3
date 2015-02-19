@@ -11,6 +11,7 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tira.domain.Coordinates;
 import tira.domain.Star;
 import tira.navigation.NavigationNode;
 import tira.navigation.StarMap;
@@ -19,6 +20,7 @@ import tira.navigation.StarMap;
 public class StarMapFrame extends JFrame {
     
     private static final String TITLE = "Star Map";
+    private static final int SCREEN_MARGIN = 10;
     
     public StarMapFrame(StarMap starMap) {
         super();
@@ -29,9 +31,7 @@ public class StarMapFrame extends JFrame {
     
     private static class StarMapPanel extends JPanel {
         
-        private StarMap starMap;
-        private int xOffset;
-        private int yOffset;
+        private final StarMap starMap;
         
         public StarMapPanel(StarMap starMap) {
             super(true);
@@ -43,33 +43,31 @@ public class StarMapFrame extends JFrame {
             super.paintComponent(graphics);
             Dimension size = getSize();
             Insets insets = getInsets();
-            xOffset = (size.width - (insets.left + insets.right)) / 2;
-            yOffset = (size.height - (insets.top + insets.bottom)) / 2;
-            paintStars(graphics);
+            int screenWidth = size.width - (insets.left + insets.right) - SCREEN_MARGIN * 2;
+            int screenHeight = size.height - (insets.top + insets.bottom) - SCREEN_MARGIN * 2;
+            ScreenCoordinateConverter coordinateConverter =
+                    new ScreenCoordinateConverter(screenWidth, screenHeight, starMap.calculateBoundingCube());
+            paintStars(graphics, coordinateConverter);
         }
         
-        private void paintStars(Graphics graphics) {
+        private void paintStars(Graphics graphics, ScreenCoordinateConverter coordinateConverter) {
             Graphics2D g2d = (Graphics2D) graphics;
             g2d.setColor(Color.WHITE);
             for (NavigationNode node : starMap.stars) {
-                paintStar(node.star, g2d);
+                paintStar(node.star, g2d, coordinateConverter);
             }
         }
         
-        private void paintStar(Star star, Graphics2D g2d) {
-            int radius = 10;
-            int x = star.location.x + xOffset - (radius / 2);
-            int y = star.location.y + yOffset - (radius / 2);
+        private void paintStar(Star star, Graphics2D g2d, ScreenCoordinateConverter coordinateConverter) {
+            Coordinates coordinates = coordinateConverter.screenCoordinates(star.location);
+            int radius = 10; // TODO: scale depending on Z coordinate
+            int x = coordinates.x - (radius / 2) + SCREEN_MARGIN;
+            int y = coordinates.y - (radius / 2) + SCREEN_MARGIN;
             Shape circle = new Ellipse2D.Float(x, y, radius, radius);
             g2d.draw(circle);
             g2d.fillOval(x, y, radius, radius);
         }
         
     }
-    
-    /*
-     * TODO: use StarMap.calculateBoundingCube() to get the dimensions of the map
-     * - scale and center POV accordingly to fit on screen! 
-     */
 
 }

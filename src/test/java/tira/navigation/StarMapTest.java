@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.Test;
 
 import tira.domain.Coordinates;
-import tira.navigation.StarMap.BoundingCube;
 
 public class StarMapTest {
 	
@@ -85,10 +84,14 @@ public class StarMapTest {
 		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
 		StarMap map = StarMap.build(stars, 500);
 		// Sol is located at 0,0,0 and Proxima Centauri at -304,292,-14
-		// thus the bounding cube should be defined by Proxima at near top left
-		// and Sol at far right bottom:
-		Coordinates nearTopLeft = PROXIMA_CENTAURI.location;
-		Coordinates farBottomRight = SOL.location;
+		// thus the bounding cube should be defined by:
+		// - Proxima at top left
+		// - Sol at right bottom
+		// - Sol.z near, Proxima.z far
+		Coordinates nearTopLeft = new Coordinates(
+		        PROXIMA_CENTAURI.location.x, PROXIMA_CENTAURI.location.y, SOL.location.z);
+		Coordinates farBottomRight = new Coordinates(
+		        SOL.location.x, SOL.location.y, PROXIMA_CENTAURI.location.z);
 		BoundingCube boundingCube = map.calculateBoundingCube();
 		assertEquals(nearTopLeft, boundingCube.nearTopLeft);
 		assertEquals(farBottomRight, boundingCube.farBottomRight);

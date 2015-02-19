@@ -51,8 +51,8 @@ public class StarMap {
 		int topEdge = Integer.MIN_VALUE;
 		int rightEdge = Integer.MIN_VALUE;
 		int bottomEdge = Integer.MAX_VALUE;
-		int nearEdge = Integer.MAX_VALUE;
-		int farEdge = Integer.MIN_VALUE;
+		int nearEdge = Integer.MIN_VALUE;
+		int farEdge = Integer.MAX_VALUE;
 		for (NavigationNode node : stars) {
 			if (leftEdge > node.star.location.x) {
 				leftEdge = node.star.location.x;
@@ -66,10 +66,10 @@ public class StarMap {
 			if (bottomEdge > node.star.location.y) {
 				bottomEdge = node.star.location.y;
 			}
-			if (nearEdge > node.star.location.z) {
+			if (nearEdge < node.star.location.z) {
 				nearEdge = node.star.location.z;
 			}
-			if (farEdge < node.star.location.z) {
+			if (farEdge > node.star.location.z) {
 				farEdge = node.star.location.z;
 			}
 		}
@@ -118,41 +118,6 @@ public class StarMap {
 				currentNode.connections.add(otherNode);
 				otherNode.connections.add(currentNode);
 			}
-		}
-	}
-	
-	/**
-	 * A value class depicting a bounding cube.
-	 */
-	public static class BoundingCube {
-		
-		/** Near top left corner: the least x and z, most y. */
-		public final Coordinates nearTopLeft;
-		/** Far bottom right corner: the most x and z, least y. */ 
-		public final Coordinates farBottomRight;
-		
-		public BoundingCube(Coordinates nearTopLeft, Coordinates farBottomRight) {
-			this.nearTopLeft = nearTopLeft;
-			this.farBottomRight = farBottomRight;
-		}
-		
-		/**
-		 * Checks whether the given coordinates fall within this bounding cube.
-		 * Edges are inclusive: coordinates located on an edge are considered
-		 * contained.
-		 * 
-		 * @param coordinates	coordinates to check.
-		 * 
-		 * @return	<code>true</code> if coordinates are contained by the bounding cube.
-		 */
-		public boolean contains(Coordinates coordinates) {
-			return (
-					nearTopLeft.x <= coordinates.x &&
-					nearTopLeft.y >= coordinates.y &&
-					nearTopLeft.z <= coordinates.z &&
-					farBottomRight.x >= coordinates.x &&
-					farBottomRight.y <= coordinates.y &&
-					farBottomRight.z >= coordinates.z);
 		}
 	}
 }
