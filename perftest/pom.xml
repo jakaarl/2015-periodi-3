@@ -14,9 +14,10 @@
 
   <dependencies>
     <dependency>
-      <groupId>net.sf.flexjson</groupId>
-      <artifactId>flexjson</artifactId>
-      <scope>compile</scope>
+      <groupId>jkaarela.tira</groupId>
+      <artifactId>routefinder</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
