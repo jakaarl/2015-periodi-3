@@ -16,9 +16,13 @@ Performance using an array list
 Performance using a linked list
 -------------------------------
 
-TODO!
-- 12 stars:
-- 100 stars:
-- 1000 stars:
-- 10000 stars:
+- 12 stars: 5 milliseconds
+- 100 stars: 14 milliseconds
+- 1000 stars: 135 milliseconds
+- 10000 stars: 11474 milliseconds
+
+Conclusion
+----------
+
+There is practically no difference in using array list or linked list. Perhaps the I/O of reading the JSON determines the performance more than choice of algorithms - clearly, this should be tested by running larger tests runs which only measure the time spent building the map, excluding reading the input file.
 

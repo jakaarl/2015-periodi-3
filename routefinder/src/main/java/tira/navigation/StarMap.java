@@ -99,7 +99,8 @@ public class StarMap {
 	
 	private static List<NavigationNode> buildNodes(List<NavigationNode> stars, int maxDistance) {
 		List<NavigationNode> nodes = new ArrayList<>();
-		// umm, kind of redundant creating another list?
+		// umm, kind of redundant creating another list? perhaps use an index and only look up
+		// connections starting from there, ie. bump up starting index instead of removing current star
 		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
 			NavigationNode currentNode = iterator.next();
 			iterator.remove();
