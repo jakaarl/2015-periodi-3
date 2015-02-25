@@ -10,8 +10,8 @@ Performance using an array list
 
 - 12 stars: 5 milliseconds
 - 100 stars: 14 milliseconds
-- 1000 stars: 134 milliseconds
-- 10000 stars: 11493 milliseconds
+- 1000 stars: 135 milliseconds
+- 10000 stars: 11537 milliseconds
 
 Performance using a linked list
 -------------------------------

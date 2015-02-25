@@ -1,9 +1,9 @@
 package tira.navigation;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
+import tira.collections.ArrayList;
+import tira.collections.List;
 import tira.domain.Coordinates;
 import tira.domain.Star;
 

@@ -7,12 +7,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static tira.navigation.Stars.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.Test;
 
+import tira.collections.ArrayList;
+import tira.collections.List;
 import tira.domain.Coordinates;
 
 public class StarMapTest {
@@ -29,20 +27,20 @@ public class StarMapTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldRaiseExceptionOnEmptyStarList() {
-		StarMap.build(Arrays.asList(new NavigationNode[0]), 1);
+		StarMap.build(new ArrayList<>(new NavigationNode[0]), 1);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void shouldRaiseExceptionOnZeroMaxDistance() {
-		StarMap.build(Arrays.asList(new NavigationNode[] { SOL_NODE }), 0);
+		StarMap.build(new ArrayList<>(new NavigationNode[] { SOL_NODE }), 0);
 	}
 	
 	@Test
 	public void shouldHaveCorrectConnections() {
 	    // wrap in new list, since the one returned by Arrays.asList() does not
 	    // support item removal, as needed by StarMap.build()
-		List<NavigationNode> stars =
-		        new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE, ALPHA_CENTAURI_NODE, BARNARDS_STAR_NODE));
+		List<NavigationNode> stars = new ArrayList<>(
+				new NavigationNode[] { SOL_NODE, PROXIMA_CENTAURI_NODE, ALPHA_CENTAURI_NODE, BARNARDS_STAR_NODE });
 		StarMap map = StarMap.build(stars, 500);
 		assertFalse(map.stars.isEmpty());
 		NavigationNode sol = map.stars.get(0);
@@ -54,7 +52,7 @@ public class StarMapTest {
 	
 	@Test
 	public void shouldFindStarByName() {
-		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
+		List<NavigationNode> stars = new ArrayList<>(new NavigationNode[] { SOL_NODE, PROXIMA_CENTAURI_NODE });
 		StarMap map = StarMap.build(stars, 500);
 		NavigationNode sol = map.findStar(SOL_NODE.star.name);
 		assertNotNull(sol);
@@ -63,7 +61,7 @@ public class StarMapTest {
 	
 	@Test
 	public void shouldReturnNullWhenNoStarFound() {
-		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(PROXIMA_CENTAURI_NODE));
+		List<NavigationNode> stars = new ArrayList<>(new NavigationNode[] { PROXIMA_CENTAURI_NODE });
 		StarMap map = StarMap.build(stars, 500);
 		NavigationNode sol = map.findStar(SOL_NODE.star.name);
 		assertNull(sol);
@@ -71,7 +69,7 @@ public class StarMapTest {
 	
 	@Test
 	public void oneStarMapShouldHavePointLikeBoundingCube() {
-		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE));
+		List<NavigationNode> stars = new ArrayList<>(new NavigationNode[] { SOL_NODE });
 		StarMap map = StarMap.build(stars, 500);
 		BoundingCube boundingCube = map.calculateBoundingCube();
 		assertEquals(SOL.location, boundingCube.nearTopLeft);
@@ -81,7 +79,7 @@ public class StarMapTest {
 	
 	@Test
 	public void twoStarMapShouldHaveStarLocationsAsBoundingCubeCorners() {
-		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
+		List<NavigationNode> stars = new ArrayList<>(new NavigationNode[] { SOL_NODE, PROXIMA_CENTAURI_NODE });
 		StarMap map = StarMap.build(stars, 500);
 		// Sol is located at 0,0,0 and Proxima Centauri at -304,292,-14
 		// thus the bounding cube should be defined by:
@@ -101,7 +99,7 @@ public class StarMapTest {
 	
 	@Test
 	public void boundingCubeShouldNotContainGivenCoordinates() {
-		List<NavigationNode> stars = new ArrayList<>(Arrays.asList(SOL_NODE, PROXIMA_CENTAURI_NODE));
+		List<NavigationNode> stars = new ArrayList<>(new NavigationNode[] { SOL_NODE, PROXIMA_CENTAURI_NODE });
 		StarMap map = StarMap.build(stars, 500);
 		BoundingCube boundingCube = map.calculateBoundingCube();
 		assertFalse(boundingCube.contains(BARNARDS_STAR.location));

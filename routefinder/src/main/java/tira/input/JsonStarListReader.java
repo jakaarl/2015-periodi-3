@@ -3,10 +3,10 @@ package tira.input;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 
 import flexjson.JSONDeserializer;
+import tira.collections.ArrayList;
 import tira.domain.Star;
 import tira.navigation.NavigationNode;
 import tira.navigation.StarMap;
@@ -47,7 +47,7 @@ public class JsonStarListReader {
 	
 	public StarMap buildStarMap(String fileName, int maxDistance) {
 	    List<Star> stars = readJson(fileName);
-	    List<NavigationNode> nodes = new ArrayList<>(stars.size());
+	    tira.collections.List<NavigationNode> nodes = new ArrayList<>();
 	    for (Star star : stars) {
 	        nodes.add(new NavigationNode(star));
 	    }
