@@ -12,7 +12,11 @@ import java.io.Writer;
 public class PerformanceTestReporter {
 	
 	static final String OUTPUT_FILE_PROPERTY = "performanceTest.outputFile";
-	private final Writer resultWriter; 
+	static final String TEST_ITERATIONS_PROPERTY = "performanceTest.iterations";
+	static final int DEFAULT_TEST_ITERATIONS = 10;
+	
+	private final Writer resultWriter;
+	private final int iterations;
 	
 	public PerformanceTestReporter() {
 		this(determineWriter());
@@ -35,15 +39,23 @@ public class PerformanceTestReporter {
 	
 	public PerformanceTestReporter(Writer resultWriter) {
 		this.resultWriter = resultWriter;
+		String iterationProperty = System.getProperty(
+				TEST_ITERATIONS_PROPERTY, String.valueOf(DEFAULT_TEST_ITERATIONS));
+		iterations = Integer.parseInt(iterationProperty);
 	}
 	
 	public void executeTestMethod(TestMethodCallback callback) {
 		writeToResults(System.lineSeparator() + "Running test: " + callback.name());
 		writeToResults(" -- " + callback.describe());
-		long startTime = System.currentTimeMillis();
-		callback.invoke();
-		long duration = System.currentTimeMillis() - startTime;
-		writeToResults(" -- Finished in " + duration + " milliseconds.");
+		long totalDuration = 0;
+		for (int i = 0; i < iterations; i++) {
+			long startTime = System.currentTimeMillis();
+			callback.invoke();
+			long duration = System.currentTimeMillis() - startTime;
+			totalDuration += duration;
+		}
+		long averageDuration = Math.round((double) totalDuration / iterations);
+		writeToResults(" -- Test ran on average in " + averageDuration + " milliseconds.");
 		try {
 			resultWriter.flush();
 		} catch (IOException ioe) {
