@@ -1,10 +1,10 @@
 package tira.input;
 
-import java.io.BufferedWriter;
+import static tira.input.Constants.*;
+import static tira.perftest.ReportWriterFactory.reportWriterFor;
+
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.Writer;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -13,20 +13,13 @@ import org.junit.Test;
 import tira.perftest.PerformanceTestReporter;
 
 public class JsonStarListReaderPerfTest {
-	
-	private static final String NEAR_SPACE_JSON_FILE = "near-space.json";
-	private static final String RANDOM_100_JSON_FILE = "random-100.json";
-	private static final String RANDOM_1000_JSON_FILE = "random-1000.json";
-	private static final String RANDOM_10000_JSON_FILE = "random-10000.json";
-	private static final int MAX_CONNECTION_DISTANCE = 750;
+
 	private static PerformanceTestReporter reporter;
 	private final JsonStarListReader reader = new JsonStarListReader();
 	
 	@BeforeClass
 	public static void initializeReporter() throws IOException {
-		BufferedWriter writer = Files.newBufferedWriter(
-				Paths.get(System.getProperty("user.dir"), JsonStarListReaderPerfTest.class.getSimpleName()),
-				Charset.defaultCharset());
+		Writer writer = reportWriterFor(JsonStarListReaderPerfTest.class);
 		reporter = new PerformanceTestReporter(writer);
 	}
 	
