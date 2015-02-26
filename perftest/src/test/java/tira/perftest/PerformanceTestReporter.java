@@ -11,15 +11,40 @@ import java.io.Writer;
  */
 public class PerformanceTestReporter {
 	
+	public static final int DEFAULT_TEST_ITERATIONS = 10;
+	public static final int MAX_TEST_ITERATIONS = 1000;
 	static final String OUTPUT_FILE_PROPERTY = "performanceTest.outputFile";
 	static final String TEST_ITERATIONS_PROPERTY = "performanceTest.iterations";
-	static final int DEFAULT_TEST_ITERATIONS = 10;
 	
 	private final Writer resultWriter;
 	private final int iterations;
 	
+	/**
+	 * Creates a test reporter with default writer and iterations. Writer or output file and number iterations can be
+	 * set by using alternative constructors, or by system properties:
+	 * <ul>
+	 *   <li>{@value #OUTPUT_FILE_PROPERTY} - path to output file</li>
+	 *   <li>{@value #TEST_ITERATIONS_PROPERTY - iteration count</li>
+	 * </ul>
+	 * The defaults are: writing to <code>System.out</code>, {@value #DEFAULT_TEST_ITERATIONS} iterations.
+	 * 
+	 *  @see	#PerformanceTestReporter(Writer)
+	 *  @see	#PerformanceTestReporter(Writer, int)
+	 */
 	public PerformanceTestReporter() {
-		this(determineWriter());
+		this(determineWriter(), determineIterations());
+	}
+	
+	/**
+	 * Creates a test reporter with given writer. Iteration count is the default, unless system
+	 * property {@value #TEST_ITERATIONS_PROPERTY} is set.
+	 * 
+	 * @param resultWriter	output writer.
+	 * 
+	 * @see	#PerformanceTestReporter()
+	 */
+	public PerformanceTestReporter(Writer resultWriter) {
+		this(resultWriter, determineIterations());
 	}
 	
 	static Writer determineWriter() {
@@ -37,13 +62,35 @@ public class PerformanceTestReporter {
 		return outputWriter;
 	}
 	
-	public PerformanceTestReporter(Writer resultWriter) {
-		this.resultWriter = resultWriter;
+	static int determineIterations() {
 		String iterationProperty = System.getProperty(
 				TEST_ITERATIONS_PROPERTY, String.valueOf(DEFAULT_TEST_ITERATIONS));
-		iterations = Integer.parseInt(iterationProperty);
+		try {
+			return Integer.parseInt(iterationProperty);
+		} catch (NumberFormatException nfe) {
+			throw new IllegalArgumentException("Invalid iteration count property: " + iterationProperty, nfe);
+		}
 	}
 	
+	/**
+	 * Creates a test reporter with given writer and iteration count.
+	 * 
+	 * @param resultWriter
+	 * @param iterations
+	 */
+	public PerformanceTestReporter(Writer resultWriter, int iterations) {
+		if (iterations < 1 || iterations > MAX_TEST_ITERATIONS) {
+			throw new IllegalArgumentException("Invalid test iteration count: " + iterations);
+		}
+		this.resultWriter = resultWriter;
+		this.iterations = iterations;
+	}
+	
+	/**
+	 * Executes test method using given callback.
+	 * 
+	 * @param callback	test method callback.
+	 */
 	public void executeTestMethod(TestMethodCallback callback) {
 		writeToResults(System.lineSeparator() + "Running test: " + callback.name());
 		writeToResults(" -- " + callback.describe());
@@ -71,6 +118,10 @@ public class PerformanceTestReporter {
 		}
 	}
 	
+	/**
+	 * Ends test reporting. While failing to invoke this method is by no means a catastrophe,
+	 * invoking it is highly recommended in order to avoid leaving a dangling, open writer.
+	 */
 	public void done() {
 		try {
 			resultWriter.close();
@@ -100,7 +151,7 @@ public class PerformanceTestReporter {
 		public String describe();
 		
 		/**
-		 * Invokes the actual test code.
+		 * Invokes the actual test code. Iterated several times, as determined by {@link PerformanceTestReporter}.
 		 */
 		public void invoke();
 	}

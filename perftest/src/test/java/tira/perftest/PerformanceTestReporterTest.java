@@ -21,9 +21,15 @@ public class PerformanceTestReporterTest {
 	public void determineWriterShouldReturnFileWriter() throws IOException {
 		String testOutput = "Hi mom!";
 		Path tempFile = Files.createTempFile("perf", "temp");
+		String initialProperty = System.getProperty(PerformanceTestReporter.OUTPUT_FILE_PROPERTY);
 		System.setProperty(PerformanceTestReporter.OUTPUT_FILE_PROPERTY, tempFile.toString());
 		Writer writer = PerformanceTestReporter.determineWriter();
-		System.clearProperty(PerformanceTestReporter.OUTPUT_FILE_PROPERTY);
+		if (initialProperty == null) {
+			System.clearProperty(PerformanceTestReporter.OUTPUT_FILE_PROPERTY);
+		} else {
+			System.setProperty(PerformanceTestReporter.OUTPUT_FILE_PROPERTY, initialProperty);
+		}
+		
 		writer.write(testOutput);
 		writer.flush();
 		List<String> lines = Files.readAllLines(tempFile, Charset.defaultCharset());
@@ -47,11 +53,31 @@ public class PerformanceTestReporterTest {
 	}
 	
 	@Test
+	public void determineIterationsShouldReturnDefault() {
+		int iterations = PerformanceTestReporter.determineIterations();
+		assertEquals(PerformanceTestReporter.DEFAULT_TEST_ITERATIONS, iterations);
+	}
+	
+	@Test
+	public void determineIterationsShouldReturnConfiguredCount() {
+		int expected = 2;
+		String initialProperty = System.getProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY);
+		System.setProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY, String.valueOf(expected));
+		int actual = PerformanceTestReporter.determineIterations();
+		if (initialProperty == null) {
+			System.clearProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY);
+		} else {
+			System.setProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY, initialProperty);
+		}
+		assertEquals(expected, actual);
+	}
+	
+	@Test
 	public void shouldReportNameAndDescription() throws IOException {
 		final String testName = "A test";
 		final String testDescription = "tests performance test reporter";
 		StringWriter writer = new StringWriter();
-		PerformanceTestReporter reporter = new PerformanceTestReporter(writer);
+		PerformanceTestReporter reporter = new PerformanceTestReporter(writer, 1);
 		reporter.executeTestMethod(new PerformanceTestReporter.TestMethodCallback() {
 			@Override
 			public String name() {
