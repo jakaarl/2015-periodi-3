@@ -1,8 +1,5 @@
 package tira.navigation;
 
-import java.util.Iterator;
-
-import tira.collections.ArrayList;
 import tira.collections.List;
 import tira.domain.Coordinates;
 import tira.domain.Star;
@@ -18,7 +15,7 @@ public class StarMap {
 	/**
 	 * Constructs a star map for holding navigation nodes.
 	 * 
-	 * @param homeworld	home world (star to start from).
+	 * @param stars    list of stars to build a map of.
 	 */
 	private StarMap(List<NavigationNode> stars) {
 		this.stars = stars;
@@ -79,10 +76,10 @@ public class StarMap {
 	}
 	
 	/**
-	 * Builds a new star map. <b>Important:</b> the given list of stars needs to be
-	 * modifiable and will be modified - provide a defensive copy if this is a problem.
+	 * Builds a new star map. Notice, that indexed access to the list is heavily used, making
+	 * an array list or similar implementation highly preferred over, say, linked list.
 	 * 
-	 * @param stars			list of (other) stars (has to be modifiable, will be modified!).
+	 * @param stars			list of stars.
 	 * @param maxDistance	maximum connection distance between stars.
 	 * 
 	 * @return	a star map.
@@ -98,27 +95,19 @@ public class StarMap {
 	}
 	
 	private static List<NavigationNode> buildNodes(List<NavigationNode> stars, int maxDistance) {
-		List<NavigationNode> nodes = new ArrayList<>();
-		// umm, kind of redundant creating another list? perhaps use an index and only look up
-		// connections starting from there, ie. bump up starting index instead of removing current star
-		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
-			NavigationNode currentNode = iterator.next();
-			iterator.remove();
-			addConnections(currentNode, stars, maxDistance);
-			nodes.add(currentNode);
-		}
-		return nodes;
+	    for (int i = 0; i < stars.size(); i++) {
+	        NavigationNode currentNode = stars.get(i);
+	        Star currentStar = currentNode.star;
+	        for (int j = i + 1; j < stars.size(); j++) {
+	            NavigationNode otherNode = stars.get(j);
+	            int distance = CALCULATOR.distance(currentStar.location, otherNode.star.location);
+	            if (distance <= maxDistance) {
+	                currentNode.connections.add(otherNode);
+	                otherNode.connections.add(currentNode);
+	            }
+	        }
+	    }
+		return stars;
 	}
 	
-	private static void addConnections(NavigationNode currentNode, List<NavigationNode> stars, int maxDistance) {
-		Star currentStar = currentNode.star;
-		for (Iterator<NavigationNode> iterator = stars.iterator(); iterator.hasNext(); ) {
-			NavigationNode otherNode = iterator.next();
-			int distance = CALCULATOR.distance(currentStar.location, otherNode.star.location);
-			if (distance <= maxDistance) {
-				currentNode.connections.add(otherNode);
-				otherNode.connections.add(currentNode);
-			}
-		}
-	}
 }
