@@ -35,7 +35,7 @@ public class JsonStarListReader {
 		return deserializer.deserialize(input);
 	}
 	
-	List<Star> readJson(String fileName) throws IllegalArgumentException {
+	public List<Star> readJson(String fileName) throws IllegalArgumentException {
 	    try {
 	        FileReader input = new FileReader(fileName);
 	        List<Star> stars = deserialize(input);
