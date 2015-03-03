@@ -8,6 +8,7 @@ import java.io.Writer;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tira.collections.ArrayList;
@@ -71,6 +72,7 @@ public class StarMapPerfTest {
     }
     
     @Test
+    @Ignore("Long-running test, enable explicitly when needed.")
     public void testWithEnormousStarMap() {
         final List<NavigationNode> nodes = readNodes(RANDOM_10000_JSON_FILE);
         reporter.executeTestMethod(new PerformanceTestReporter.TestMethodCallback() {

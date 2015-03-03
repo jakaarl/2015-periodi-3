@@ -8,6 +8,7 @@ import java.io.Writer;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import tira.perftest.PerformanceTestReporter;
@@ -51,6 +52,7 @@ public class JsonStarListReaderPerfTest {
 	}
 	
 	@Test
+	@Ignore("Long-running test, enable explicitly when needed.")
 	public void testWithEnormousStarMap() {
 		final String jsonPath = this.getClass().getClassLoader().getResource(RANDOM_10000_JSON_FILE).getFile();
 		reporter.executeTestMethod(createCallback(
