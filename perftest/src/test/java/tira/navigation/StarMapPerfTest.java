@@ -96,7 +96,7 @@ public class StarMapPerfTest {
         String jsonPath = StarMapPerfTest.class.getClassLoader().getResource(jsonResource).getFile();
         JsonStarListReader reader = new JsonStarListReader();
         java.util.List<Star> stars = reader.readJson(jsonPath);
-        List<NavigationNode> nodes = new ArrayList<>();
+        List<NavigationNode> nodes = new ArrayList<>(stars.size());
         for (Star star : stars) {
             nodes.add(new NavigationNode(star));
         }
