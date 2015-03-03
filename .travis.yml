@@ -2,5 +2,11 @@ language: java
 jdk:
  - oraclejdk7
  - openjdk7
+env:
+  global:
+    - MAVEN_OPTS="-Xms512M -Xmx1024M"
+branches:
+  only:
+    - master
 after_success:
 - mvn clean cobertura:cobertura coveralls:report
