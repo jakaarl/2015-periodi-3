@@ -8,7 +8,7 @@ Kulkeminen tähdeltä A tähdelle B lyhintä reittiä, kun tähtikartasta muodos
 
 ## Suorittaminen
 
-Annetaan JSON-muotoinen tähtikartta (ks. `tira.input.JsonStarListReader`), aloitustähti, sekä kohdetähti. Projektin resources-hakemistoista löytyy esimerkkejä JSON-tiedostoista. Suoritettava luokka on `tira.commandline.RouteFinderLauncher`.
+Annetaan JSON-muotoinen tähtikartta (ks. `tira.input.JsonStarListReader`), aloitustähti, sekä kohdetähti. Projektin resources-hakemistoista löytyy esimerkkejä JSON-tiedostoista. Suoritettava luokka on `tira.commandline.RouteFinderLauncher`. Sen voi suorittaa komennolla `java -jar routefinder/target/routefinder-<version>-jar-with-dependencies.jar` olettaen, että työhakemisto on projektin juurihakemisto; `<version>` tulee korvata versiolla, esim. "0.1-SNAPSHOT").
 
 ## Algoritmeista
 
