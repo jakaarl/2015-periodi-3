@@ -43,3 +43,6 @@ StarMapPerfTest, 10 suorituskerran keskiarvo:
 Suoritusajoissa oli pientä varianssia eri ajokerroilla, mutta suuruusluokat
 pysyivät jokseenkin samoina. Yksittäisellä ajolla ei ollut juurikaan eroa
 kymmenen ajon keskiarvoon.
+
+Itse reittihaun suoritusaika oli 10000:kin tähden kartalla alle millisekunnista
+seitsemään, eikä siten testatuilla datamäärillä käytännössä mitattavissa.

@@ -34,8 +34,3 @@ Testiluokat ovat testattavia luokkia vastaavissa pakkauksissa.
 Lisäksi `perftest` -modulin paketissa `tira.perftest` on pari luokkaa
 suorituskykytestaamista varten, sekä yksikkötesti niille. 
 
-## Aika- ja tilavaativuus
-
-## Suorituskyky
-
-## Puutteet ja parannusideat
