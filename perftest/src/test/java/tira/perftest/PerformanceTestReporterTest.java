@@ -35,7 +35,7 @@ public class PerformanceTestReporterTest {
 		List<String> lines = Files.readAllLines(tempFile, Charset.defaultCharset());
 		assertEquals(1, lines.size());
 		assertEquals(testOutput, lines.get(0));
-		Files.delete(tempFile);
+		tempFile.toFile().deleteOnExit();
 	}
 	
 	@Test
