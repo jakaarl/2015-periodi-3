@@ -47,4 +47,15 @@ Mikäli annetulta lähtötähdeltä on reitti kohdetähdelle, ohjelma tulostaa r
 tähdet yksi per rivi, lähtötähdestä kohdetähteen. BFS-toteutuksella palautettu
 reitti on lyhyin mahdollinen, ja useamman samanpituisen reitin tapauksessa
 tulostetaan ensin löydetty reitti.
- 
+
+## Lähteet
+
+ * http://en.wikipedia.org/wiki/Breadth-first_search
+ * http://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+ * http://en.wikipedia.org/wiki/A*_search_algorithm
+ * http://en.wikipedia.org/wiki/Queue_(abstract_data_type)
+ * http://en.wikipedia.org/wiki/Linked_list
+ * http://en.wikipedia.org/wiki/Dynamic_array
+ * http://en.wikipedia.org/wiki/Hash_table
+ * http://en.wikipedia.org/wiki/Euclidean_distance
+ * http://docs.oracle.com/javase/8/docs/api/index.html
