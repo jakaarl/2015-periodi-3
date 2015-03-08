@@ -84,15 +84,7 @@ public class BreadthFirstRouteFinderPerfTest {
 				Random random = new Random();
 				NavigationNode from = map.stars.get(random.nextInt(map.stars.size()));
 				NavigationNode to = map.stars.get(random.nextInt(map.stars.size()));
-				System.out.println("Finding route from " + from.star + " to " + to.star);
-				List<NavigationNode> route =  routeFinder.findRoute(from, to);
-				if (route.isEmpty()) {
-					System.out.println("No route found.");
-				} else {
-					for (NavigationNode node : route) {
-						System.out.println(node.star);
-					}
-				}
+				routeFinder.findRoute(from, to);
 			}
 			
 			@Override
