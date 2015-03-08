@@ -22,6 +22,18 @@ vain kyseistä modulia.
 
 ### Pakkaukset ja luokat
 
+Sovellus on jaettu useampaan pakkaukseen:
+ * tira.collections - tietorakennetoteutukset
+ * tira.commandline - käynnistyskomennot
+ * tira.domain - sovelluksen omia tietotyyppejä
+ * tira.input - JSON-syötteen käsittely
+ * tira.navigation - reitinhakulogiikka ja sen käyttämiä tietotyyppejä
+ * tira.visualization.starmap - alkeelliselle asteelle jäänyt visualisointi
+
+Testiluokat ovat testattavia luokkia vastaavissa pakkauksissa.
+Lisäksi `perftest` -modulin paketissa `tira.perftest` on pari luokkaa
+suorituskykytestaamista varten, sekä yksikkötesti niille. 
+
 ## Aika- ja tilavaativuus
 
 ## Suorituskyky
