@@ -15,6 +15,15 @@ ajan ja energian salliessa myös A*. BFS:n toteuttamiseen tarvitaan jono
 linkitetyllä listalla (linked list), dynaamisella taulukolla (array list),
 sekä hajautustaululla (hash map).
 
+### Oletettu aika- ja tilavaativuus
+
+BFS:n aikavaativuus riippuu pitkälti yhteyksien määrästä - mitä enemmän
+verkossa on yhteyksiä, sitä huonommin algoritmi suoriutuu. Oletettava pahimman
+tapauksen aikavaativuus on luokkaa O(n^2).
+
+Tilaa BFS vaatii tutkimista odottavien ja jo tutkittujen solmujen varastoimiseen,
+sekä kuljetun reitin muistamiseen: suuruusluokka on arviolta O(n).
+
 ## Syötteet
 
 Ohjelma ottaa syötteenään JSON-formaatissa annetun listan tähdistä
