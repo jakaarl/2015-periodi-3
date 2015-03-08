@@ -27,3 +27,19 @@ Testit on helpointa suorittaa komentoriviltä Mavenilla, `mvn test`, tai
 IDE:stä. Tarkemmat ohjeet suorittamiseen löytyvät käyttöohjeesta.
 
 ## Suorituskykytestin tulokset
+
+JsonStarListReaderPerfTest, 10 suorituskerran keskiarvo:
+ * n=12, 5 ms
+ * n=100, 14 ms
+ * n=1000, 127 ms
+ * n=10000, 10469 ms
+
+StarMapPerfTest, 10 suorituskerran keskiarvo:
+ * n=12, ~0 ms
+ * n=100, 2 ms
+ * n=1000, 103 ms
+ * n=10000, 10449 ms
+
+Suoritusajoissa oli pientä varianssia eri ajokerroilla, mutta suuruusluokat
+pysyivät jokseenkin samoina. Yksittäisellä ajolla ei ollut juurikaan eroa
+kymmenen ajon keskiarvoon.
