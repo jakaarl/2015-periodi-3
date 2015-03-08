@@ -54,7 +54,12 @@ public class PerformanceTestReporterTest {
 	
 	@Test
 	public void determineIterationsShouldReturnDefault() {
+		String initialProperty = System.getProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY);
+		System.clearProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY);
 		int iterations = PerformanceTestReporter.determineIterations();
+		if (initialProperty != null) {
+			System.setProperty(PerformanceTestReporter.TEST_ITERATIONS_PROPERTY, initialProperty);
+		}
 		assertEquals(PerformanceTestReporter.DEFAULT_TEST_ITERATIONS, iterations);
 	}
 	
